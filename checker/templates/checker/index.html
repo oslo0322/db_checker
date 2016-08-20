@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="//ichef.github.io/iC-framework/dist/css/ic-framework.min.css">
+</head>
+
+<body>
+    <div class="ic-blockquote ic-blockquote--note" style="width: 60%; margin: 10px auto;">
+        <form action="/" method="post">{% csrf_token %}
+         <ul class="ic-list ic-list--setting">
+            {% for test_type in test_types %}
+                <li class="ic-list__item ic-state-success">
+                    <div class="ic-list__item-container">
+                        <span class="ic-list__item-body">
+                            <span class="ic-list__item-label">
+                                <div class="ic-text-group">
+                                    <span class="ic-text-group__text">{{ test_type.name }}</span>
+                        {% if test_type.result %}
+                            <i class="ic-icon ic-icon-success ic-text-group__icon"></i>
+                        {% elif test_type.result == False %}
+                            <i class="ic-icon ic-icon-error ic-text-group__icon"></i>
+                        {% endif %}
+                    </div>
+                    </span>
+                    <span class="ic-list__item-value">
+                                <input class="ic-input" type="text" name="{{ test_type.name }}"
+                                    placeholder="10.10.0.1" />
+                            </span>
+                    </span>
+                    </div>
+                </li>
+            {% endfor %}
+         </ul>
+            <input class="ic-btn ic-btn--white" type="submit" value="test!" />
+        </form>
+    </div>
+</body>
+</html>
